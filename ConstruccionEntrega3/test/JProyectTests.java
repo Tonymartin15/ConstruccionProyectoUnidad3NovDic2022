@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
 import utils.JsonReader;
 
 /**
@@ -32,10 +33,6 @@ public class JProyectTests {
     
     @AfterClass
     public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
     }
     
     @After
@@ -73,14 +70,36 @@ public class JProyectTests {
     JsonReader Read = new JsonReader();
     Read.JsonReader();
 }
+    @BeforeEach
+    public void setUp() {
+    }
     
     @Test
-    public void ValidacionDeModificacion() throws IOException {
+    public void ValidacionDeModificaciondDeNombre() throws IOException {
+        EmployeeModify validacionModif = new EmployeeModify();
+        validacionModif.EdicionJson();
+        boolean expectedResult = false;
+        boolean actualResult = validacionModif.isModifiedFirstName();
+        assertEquals(expectedResult, actualResult);
+    }
+    
+    @Test
+    public void ValidacionDeModificaciondDeApellido() throws IOException {
 
         EmployeeModify validacionModif = new EmployeeModify();
         validacionModif.EdicionJson();
-        boolean expectedResult = true;
-        boolean actualResult = validacionModif.isActive();
+        boolean expectedResult = false;
+        boolean actualResult = validacionModif.isModifiedLastName();
+        assertEquals(expectedResult, actualResult);
+    }
+    
+    @Test
+    public void ValidacionDeModificaciondDeUrlFoto() throws IOException {
+
+        EmployeeModify validacionModif = new EmployeeModify();
+        validacionModif.EdicionJson();
+        boolean expectedResult = false;
+        boolean actualResult = validacionModif.isModifiedPhoto();
         assertEquals(expectedResult, actualResult);
     }
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelos;
 
 import java.io.FileWriter;
@@ -19,12 +15,24 @@ import utils.JsonReader;
  * @author Francisco
  */
 public class EmployeeModify {
-    boolean Errors=true;
     boolean PhotoVal = false;
+    boolean FirstNVal = false;
+    boolean LastNVal = false;
+    boolean PhotoModVal = false;
 
-    public boolean isActive(){
-        return this.Errors;
+    
+    public boolean isModifiedFirstName(){
+        return this.FirstNVal;
     }
+    
+    public boolean isModifiedLastName(){
+        return this.LastNVal;
+    }
+    
+    public boolean isModifiedPhoto(){
+        return this.PhotoModVal;
+    }
+    
 
 	public void EdicionJson()
 	{
@@ -44,11 +52,11 @@ public class EmployeeModify {
                 String lastName = JOptionPane.showInputDialog("Ingresa el apellido del empleado " + identificador);
                 String photo = "";
                 while (PhotoVal == false){
-                photo = JOptionPane.showInputDialog("Ingrese una imagen para el empleado "+ identificador + " Esta debe ser en formato JPG");
-		Pattern p = Pattern.compile("[.jpg,https://]"); 
+                photo = JOptionPane.showInputDialog("Ingrese una imagen para el empleado "+ identificador + " Esta debe ser un url Valido");
+		Pattern p = Pattern.compile("https://"); 
 		Matcher m = p.matcher(photo);
 		if (!m.find()){
-                JOptionPane.showMessageDialog(null, "No se ha encontrado JPG valido");
+                JOptionPane.showMessageDialog(null, "No se ha encontrado un link de imagen valido");
 		} else{
                     PhotoVal = true;
                 }
@@ -60,11 +68,15 @@ public class EmployeeModify {
                 empleadotemp.put("photo", photo);
          
                 if (firstName.equals(employees.getName())) {
-                    Errors = false;
-                    
-                } else {
-                    
+                    FirstNVal = true;
                 }
+                if(lastName.equals(employees.getLastname())){
+                    LastNVal = true;
+                }
+                if(photo.equals(employees.getPhoto())){
+                    PhotoModVal = true;
+                }
+                
             } else {
                 
                 empleadotemp.put("id", employees.getId());
