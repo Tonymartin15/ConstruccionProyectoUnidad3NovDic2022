@@ -120,10 +120,13 @@ public class JProyectTests {
     public void ValidacionDeAgregado() throws IOException {
 
         EmployeeAdd validacionAgregado = new EmployeeAdd();
-        validacionAgregado.EmployeeAdd();
+        validacionAgregado.EmployeeCounter();
         int expectedResult = validacionAgregado.EmployeeCount();
-        int actualResult = validacionAgregado.EmployeeValidation();
-        assertEquals(expectedResult, actualResult);
+        //System.out.println(validacionAgregado.EmployeeCount());
+        validacionAgregado.EmployeeAdd();
+        int actualResult = validacionAgregado.EmployeeCount();
+        //System.out.println(validacionAgregado.EmployeeCount());
+        assertEquals(expectedResult+1, actualResult);
     }
     
 }
